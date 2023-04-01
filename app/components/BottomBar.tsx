@@ -129,7 +129,7 @@ export const BottomBar: React.FC<BottomBarProps> = ({ track, onNextTrack }) => {
   return (
     <>
       <audio preload="none" ref={audioPlayer} className="hidden" src={track.fileUrl} />
-      <audio preload="none" ref={rainPlayer} className="hidden" src="/audio/rain.mp3" />
+      <audio preload="none" loop ref={rainPlayer} className="hidden" src="/audio/rain.mp3" />
       <div className="flex flex-col">
         <div className="flex flex-row-reverse text-neutral-100 text-lg pb-1 pr-0.5">
           <div className="ml-2 bg-slate-900 p-2 opacity-80 rounded-lg" onClick={() => onNextTrackClick()}>
