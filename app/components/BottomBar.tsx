@@ -103,7 +103,11 @@ export const BottomBar: React.FC<BottomBarProps> = ({ track, onNextTrack }) => {
 
       setCurrentPosition(audioPlayer.current.currentTime);
     });
-  }, [audioPlayer]);
+
+    audioPlayer.current.onended = () => {
+      onNextTrackClick();
+    }
+  }, [audioPlayer, onNextTrackClick]);
 
   React.useEffect(() => {
     if (!audioPlayer.current) return;
