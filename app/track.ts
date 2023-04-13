@@ -26,7 +26,7 @@ export async function getRandomTrack(dbUrl: string, dbAuthKey: string): Promise<
   if (!randomTrack.data || !randomTrack.data.file) {
     throw Error("Unable to fetch random track");
   }
-  
+
   const igdbImageId = randomTrack.data.igdb_image_id;
 
   const cover = igdbImageId ?

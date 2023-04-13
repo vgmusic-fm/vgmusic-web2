@@ -9,11 +9,19 @@ import { useFetcher, useLoaderData } from "@remix-run/react";
 import { BackgroundVideo } from "~/components/BackgroundVideo";
 import { BottomBar } from "~/components/BottomBar";
 import { TopBar } from "~/components/TopBar";
-import { getRandomTrack } from "~/track";
 import { randomVideo } from "~/util";
 
 export const loader = async (args: LoaderArgs) => {
-  const randomTrack = await getRandomTrack(args.context.SUPABASE_URL, args.context.SUPABASE_SECRET);
+  const randomTrackDO = args.context.DO_PLAYLIST;
+
+  const ip = args.request.headers.get("CF-CONNECTING-IP");
+
+  const id = ip ? randomTrackDO.idFromName(ip) : randomTrackDO.newUniqueId();
+  const obj = randomTrackDO.get(id);
+
+  const response = await obj.fetch(args.request);
+
+  const randomTrack = await response.json<Track>();
   const randomVideoUrl = randomVideo();
 
   return json({ track: randomTrack, video: randomVideoUrl });

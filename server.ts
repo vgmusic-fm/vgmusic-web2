@@ -4,6 +4,7 @@ import * as build from "@remix-run/dev/server-build";
 interface Env {
   SUPABASE_URL: string;
   SUPABASE_SECRET: string;
+  DO_PLAYLIST: DurableObjectNamespace;
 }
 
 type Context = EventContext<Env, string, unknown>;
@@ -19,6 +20,7 @@ const handleRequest = createPagesFunctionHandler({
     return {
       SUPABASE_URL: context.env.SUPABASE_URL,
       SUPABASE_SECRET: context.env.SUPABASE_SECRET,
+      DO_PLAYLIST: context.env.DO_PLAYLIST,
     }
   },
 });
